@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorEventos.Migrations
 {
     [DbContext(typeof(GestorEventosContext))]
-    [Migration("20240411215558_AddDescripcionToEvento")]
-    partial class AddDescripcionToEvento
+    [Migration("20240426185249_porfin")]
+    partial class porfin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -40,9 +40,13 @@ namespace GestorEventos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NombreLugar")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Evento");
+                    b.ToTable("Eventos", (string)null);
                 });
 #pragma warning restore 612, 618
         }

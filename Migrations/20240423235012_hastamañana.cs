@@ -5,7 +5,7 @@
 namespace GestorEventos.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDescripcionToEvento : Migration
+    public partial class hastamañana : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

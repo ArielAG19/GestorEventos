@@ -24,8 +24,10 @@ namespace GestorEventos
             services.AddDbContext<GestorEventosContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // Agregar solo controladores y vistas
             services.AddControllersWithViews();
         }
+
 
         // Configurar la aplicación y el entorno
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,8 +47,6 @@ namespace GestorEventos
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -62,4 +62,5 @@ namespace GestorEventos
 
     }
 }
+
 

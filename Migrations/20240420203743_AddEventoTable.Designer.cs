@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorEventos.Migrations
 {
     [DbContext(typeof(GestorEventosContext))]
-    [Migration("20240412210655_EliminarColumnasEvento")]
-    partial class EliminarColumnasEvento
+    [Migration("20240420203743_AddEventoTable")]
+    partial class AddEventoTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,10 @@ namespace GestorEventos.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreLugar")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

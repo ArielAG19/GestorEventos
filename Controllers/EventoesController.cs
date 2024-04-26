@@ -22,7 +22,7 @@ namespace GestorEventos.Controllers
         // GET: Eventoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Evento.ToListAsync());
+            return View(await _context.Eventos.ToListAsync());
         }
 
         // GET: Eventoes/Details/5
@@ -33,7 +33,7 @@ namespace GestorEventos.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento
+            var evento = await _context.Eventos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (evento == null)
             {
@@ -52,7 +52,7 @@ namespace GestorEventos.Controllers
         // POST: Eventoes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Fecha")] Evento evento)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Fecha,NombreLugar")] Evento evento)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace GestorEventos.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento.FindAsync(id);
+            var evento = await _context.Eventos.FindAsync(id);
             if (evento == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace GestorEventos.Controllers
         // POST: Eventoes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Fecha")] Evento evento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Fecha,NombreLugar")] Evento evento)
         {
             if (id != evento.Id)
             {
@@ -120,7 +120,7 @@ namespace GestorEventos.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento
+            var evento = await _context.Eventos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (evento == null)
             {
@@ -135,10 +135,10 @@ namespace GestorEventos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var evento = await _context.Evento.FindAsync(id);
+            var evento = await _context.Eventos.FindAsync(id);
             if (evento != null)
             {
-                _context.Evento.Remove(evento);
+                _context.Eventos.Remove(evento);
             }
 
             await _context.SaveChangesAsync();
@@ -147,7 +147,13 @@ namespace GestorEventos.Controllers
 
         private bool EventoExists(int id)
         {
-            return _context.Evento.Any(e => e.Id == id);
+            return _context.Eventos.Any(e => e.Id == id);
+        }
+
+        // GET: Eventoes/Login
+        public IActionResult Login()
+        {
+            return View();
         }
     }
 }
