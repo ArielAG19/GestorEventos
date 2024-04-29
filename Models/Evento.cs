@@ -18,7 +18,7 @@ namespace GestorEventos.Models
         public string? NombreLugar { get; set; }
 
 
-        // Otras propiedades relacionadas con el lugar, si es necesario
+       
     }
 }
 

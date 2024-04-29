@@ -130,20 +130,23 @@ namespace GestorEventos.Controllers
             return View(evento);
         }
 
-        // POST: Eventoes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Eventoes/DeleteConfirmed/5
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var evento = await _context.Eventos.FindAsync(id);
-            if (evento != null)
+            if (evento == null)
             {
-                _context.Eventos.Remove(evento);
+                return NotFound();
             }
 
+            _context.Eventos.Remove(evento);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool EventoExists(int id)
         {
