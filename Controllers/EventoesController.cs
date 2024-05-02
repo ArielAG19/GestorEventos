@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestorEventos.Data;
 using GestorEventos.Models;
@@ -147,16 +144,25 @@ namespace GestorEventos.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        // Método para verificar si existe un evento por su ID
         private bool EventoExists(int id)
         {
             return _context.Eventos.Any(e => e.Id == id);
         }
 
-        // GET: Eventoes/Login
+        // Método para mostrar una vista de inicio de sesión
         public IActionResult Login()
         {
             return View();
         }
+
+        // Método para consumir la API y mostrar los eventos
+        public async Task<IActionResult> ApiIndex()
+        {
+            var eventos = new List<Evento>();
+            // Código para consumir la API
+            return View(eventos);
+        }
     }
 }
+

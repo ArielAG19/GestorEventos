@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using GestorEventos.Models;
-using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace GestorEventos.Data
 {
-    public class GestorEventosContext : DbContext
+    public class GestorEventosContext : DbContext, IGestorEventosContext
     {
         public GestorEventosContext(DbContextOptions<GestorEventosContext> options)
             : base(options)
@@ -13,16 +15,20 @@ namespace GestorEventos.Data
 
         public DbSet<Evento> Eventos { get; set; } = default!;
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // Implementación del método SaveChangesAsync de DbContext
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            base.OnModelCreating(modelBuilder);
-
-            // Mapeo del nombre de la tabla para la entidad Evento
-            modelBuilder.Entity<Evento>().ToTable("Eventos");
-
-            // Método para seed data
-            SeedData.Initialize(this);
+            return base.SaveChangesAsync(cancellationToken);
         }
+
+        // Implementación del método Entry de IGestorEventosContext
+        public EntityEntry<T> Entry<T>(T entity) where T : class
+        {
+            return base.Entry(entity);
+        }
+
+        // Otras implementaciones de métodos o propiedades de la interfaz IGestorEventosContext
+        // Aquí puedes añadir cualquier otro método o propiedad requerido por la interfaz
     }
 
     public static class SeedData

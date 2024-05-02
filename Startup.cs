@@ -26,8 +26,10 @@ namespace GestorEventos
 
             // Agregar solo controladores y vistas
             services.AddControllersWithViews();
-        }
 
+            // Agregar la inyección de dependencias para la interfaz IGestorEventosContext
+            services.AddScoped<IGestorEventosContext, GestorEventosContext>();
+        }
 
         // Configurar la aplicación y el entorno
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,8 +61,5 @@ namespace GestorEventos
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
     }
 }
-
-
